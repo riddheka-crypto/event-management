@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS registrations (
   user_id INTEGER REFERENCES users(id),
   event_id INTEGER REFERENCES events(id),
   status VARCHAR(20) DEFAULT 'confirmed',
-  qr_code VARCHAR(255),
+  qr_code TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   UNIQUE(user_id, event_id)
 );

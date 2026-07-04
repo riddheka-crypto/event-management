@@ -48,7 +48,7 @@ class Registration(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     event_id = Column(Integer, ForeignKey('events.id'))
     status = Column(String(20), default='confirmed')
-    qr_code = Column(String(255), nullable=True)
+    qr_code = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship('User', back_populates='registrations')

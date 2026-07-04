@@ -27,7 +27,12 @@ def health_check():
 def create_tables_on_startup():
     try:
         from app.database import engine, Base
+        from sqlalchemy import text
+
         Base.metadata.create_all(bind=engine)
+        if engine.url.get_backend_name() == 'postgresql':
+            with engine.begin() as connection:
+                connection.execute(text('ALTER TABLE registrations ALTER COLUMN qr_code TYPE TEXT'))
     except Exception:
         # In case migrations or DB are managed externally, don't crash startup
         pass
